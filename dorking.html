@@ -6,385 +6,7 @@
     <title>DorkVault - Google Dorks Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00d4ff;
-            --primary-dark: #00a8cc;
-            --secondary: #ff006e;
-            --accent: #7209b7;
-            --dark-bg: #0f0f1e;
-            --dark-secondary: #1a1a2e;
-            --dark-tertiary: #16213e;
-            --light-text: #ffffff;
-            --muted-text: #a0a0b0;
-            --success: #00d4aa;
-            --warning: #ff9900;
-            --danger: #ff1744;
-            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
-            color: var(--light-text);
-            background-attachment: fixed;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(114, 9, 183, 0.1) 0%, transparent 50%);
-            animation: gradientShift 15s ease infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(25px, 25px); }
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.2rem 2rem;
-            background: rgba(15, 15, 30, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            letter-spacing: 2px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .nav-right {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--light-text);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            position: relative;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: translateX(-50%);
-            transition: width 0.4s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .theme-toggle {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(114, 9, 183, 0.2));
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            color: var(--primary);
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.4), rgba(114, 9, 183, 0.4));
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 8rem auto 2rem;
-            padding: 0 2rem;
-        }
-
-        /* Header Section */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-
-        .header p {
-            color: var(--muted-text);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Search Container */
-        .search-container {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.6), rgba(22, 33, 62, 0.4));
-            border: 1px solid rgba(0, 212, 255, 0.15);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .search-container:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1.2rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(0, 212, 255, 0.3);
-            border-radius: 12px;
-            color: var(--light-text);
-            font-size: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .search-input::placeholder {
-            color: var(--muted-text);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-        }
-
-        /* Dorks Grid */
-        .dorks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
-        }
-
-        .dork-card {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.5));
-            border: 1px solid rgba(0, 212, 255, 0.15);
-            border-radius: 12px;
-            padding: 1.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .dork-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .dork-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
-            transform: translateY(-6px);
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.7));
-        }
-
-        .dork-card:hover::before {
-            left: 100%;
-        }
-
-        .dork-icon {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            display: inline-block;
-        }
-
-        .dork-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--light-text);
-            margin-bottom: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .dork-card:hover .dork-title {
-            color: var(--success);
-        }
-
-        .dork-description {
-            color: var(--muted-text);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 5rem;
-            padding: 2.5rem 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            text-align: center;
-        }
-
-        .footer-text {
-            color: var(--muted-text);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem 1.5rem;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 8px;
-        }
-
-        .footer-links a:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: linear-gradient(135deg, var(--success), var(--primary));
-            color: var(--dark-bg);
-            padding: 1.2rem 1.8rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transform: translateY(150px);
-            opacity: 0;
-            transition: var(--transition);
-            font-weight: 600;
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-            z-index: 2000;
-        }
-
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .navbar-links {
-                display: none;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .dorks-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                margin-top: 7rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -401,13 +23,28 @@
                 <li><a href="./index.html#xss">XSS</a></li>
                 <li><a href="./index.html#lfi">LFI</a></li>
                 <li><a href="./index.html#cors">CORS</a></li>
+                <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
+                <li><a href="#" id="tools-link">Tools</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Tools Sidebar -->
+    <div class="tools-sidebar">
+        <div class="sidebar-header">
+            <h2>Security Tools</h2>
+            <button class="close-sidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="tools-list"></div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
 
     <div class="container">
         <!-- Header -->
@@ -587,6 +224,92 @@
 
         // Initialize
         renderDorks();
+
+        // Tools Sidebar functionality
+        const toolsLink = document.getElementById('tools-link');
+        const toolsSidebar = document.querySelector('.tools-sidebar');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const closeSidebar = document.querySelector('.close-sidebar');
+
+        function toggleSidebar() {
+            if (!toolsSidebar) return;
+            toolsSidebar.classList.toggle('active');
+            if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
+        }
+
+        if (toolsLink) {
+            toolsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleSidebar();
+            });
+        }
+
+        if (closeSidebar) {
+            closeSidebar.addEventListener('click', toggleSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', function() {
+                if (toolsSidebar && toolsSidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (toolsSidebar && toolsSidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Security Tools data
+        const securityTools = [
+            { subtitle: 'Subfinder', info: 'Subdomain discovery and enumeration tool', downloadLink: 'https://github.com/projectdiscovery/subfinder' },
+            { subtitle: 'HTTPx', info: 'HTTP probe with multiple features', downloadLink: 'https://github.com/projectdiscovery/httpx' },
+            { subtitle: 'Katana', info: 'Next-gen crawling and spidering framework', downloadLink: 'https://github.com/projectdiscovery/katana' },
+            { subtitle: 'Nuclei', info: 'Fast customisable vulnerability scanner', downloadLink: 'https://github.com/projectdiscovery/nuclei' },
+            { subtitle: 'SSRFmap', info: 'SSRF testing and exploitation tool', downloadLink: 'https://github.com/swisskyrepo/SSRFmap' },
+            { subtitle: 'Ghauri', info: 'Advanced SQL injection detection tool', downloadLink: 'https://github.com/r0oth3x49/ghauri' },
+            { subtitle: 'Amass', info: 'In-depth DNS enumeration and mapping', downloadLink: 'https://github.com/OWASP/Amass' },
+            { subtitle: 'Assetfinder', info: 'Find domains and subdomains quickly', downloadLink: 'https://github.com/tomnomnom/assetfinder' },
+            { subtitle: 'Masscan', info: 'TCP port scanner with high speed', downloadLink: 'https://github.com/robertdavidgraham/masscan' },
+            { subtitle: 'Hakrawler', info: 'Web crawler for discovering endpoints', downloadLink: 'https://github.com/hakluke/hakrawler' },
+            { subtitle: 'URLFinder', info: 'Advanced URL extraction and discovery', downloadLink: 'https://github.com/projectdiscovery/urlfinder' },
+            { subtitle: 'LinkFinder', info: 'Extract endpoints from JavaScript files', downloadLink: 'https://github.com/GerbenJavado/LinkFinder' },
+            { subtitle: 'Waybackurls', info: 'Fetch URLs from Wayback Machine', downloadLink: 'https://github.com/tomnomnom/waybackurls' },
+            { subtitle: 'x8', info: 'Hidden parameters discovery tool', downloadLink: 'https://github.com/Sh1Yo/x8' },
+            { subtitle: 'Commix', info: 'Automated injection testing framework', downloadLink: 'https://github.com/commixproject/commix' },
+            { subtitle: 'DotDotPwn', info: 'LFI/RFI vulnerability scanner', downloadLink: 'https://github.com/wireghoul/dotdotpwn' },
+            { subtitle: 'LFISuite', info: 'Local File Inclusion exploitation suite', downloadLink: 'https://github.com/D35m0nd142/LFISuite' },
+            { subtitle: 'SSTImap', info: 'Server-Side Template Injection scanner', downloadLink: 'https://github.com/vladko312/SSTImap' },
+            { subtitle: 'S3Scanner', info: 'S3 bucket discovery and enumeration', downloadLink: 'https://github.com/sa7mon/S3Scanner' },
+            { subtitle: 'gf', info: 'A wrapper around grep for patterns', downloadLink: 'https://github.com/tomnomnom/gf' }
+        ];
+
+        function renderSecurityTools() {
+            const toolsList = document.querySelector('.tools-sidebar .tools-list');
+            if (!toolsList) return;
+            toolsList.innerHTML = '';
+            
+            securityTools.forEach(tool => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                
+                toolItem.innerHTML = `
+                    <h3>${tool.subtitle}</h3>
+                    <p>${tool.info}</p>
+                    <a href="${tool.downloadLink}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                `;
+                
+                toolsList.appendChild(toolItem);
+            });
+        }
+
+        renderSecurityTools();
     </script>
 </body>
 </html>

@@ -6,646 +6,45 @@
     <title>DorkVault - Your Bug Hunting Arsenal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00d4ff;
-            --primary-dark: #00a8cc;
-            --secondary: #ff006e;
-            --accent: #7209b7;
-            --dark-bg: #0f0f1e;
-            --dark-secondary: #1a1a2e;
-            --dark-tertiary: #16213e;
-            --light-text: #ffffff;
-            --muted-text: #a0a0b0;
-            --success: #00d4aa;
-            --warning: #ff9900;
-            --danger: #ff1744;
-            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
-            color: var(--light-text);
-            overflow-x: hidden;
-            background-attachment: fixed;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(114, 9, 183, 0.1) 0%, transparent 50%);
-            animation: gradientShift 15s ease infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(25px, 25px); }
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.2rem 2rem;
-            background: rgba(15, 15, 30, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            letter-spacing: 2px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-            animation: logoFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .nav-right {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--light-text);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            position: relative;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: translateX(-50%);
-            transition: width 0.4s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .theme-toggle {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(114, 9, 183, 0.2));
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            color: var(--primary);
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.4), rgba(114, 9, 183, 0.4));
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1400px;
-            margin: 8rem auto 2rem;
-            padding: 0 2rem;
-        }
-
-        /* Hero/Search Section */
-        .hero-section {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--success), var(--primary));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientFlow 6s ease infinite;
-        }
-
-        @keyframes gradientFlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--muted-text);
-            margin-bottom: 2.5rem;
-            letter-spacing: 1px;
-        }
-
-        /* Search Form */
-        .search-form {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(0, 212, 255, 0.3);
-            border-radius: 12px;
-            color: var(--light-text);
-            font-size: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            flex: 1;
-            min-width: 300px;
-            transition: var(--transition);
-        }
-
-        .search-input::placeholder {
-            color: var(--muted-text);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-        }
-
-        .search-btn {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            border: none;
-            color: var(--dark-bg);
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .search-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 3rem 0 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 2rem;
-            position: relative;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 40px;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-
-        .section-title i {
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-
-        /* Tool Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .tool-card {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.6));
-            border: 1px solid rgba(0, 212, 255, 0.15);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .tool-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-8px);
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.8));
-        }
-
-        .tool-card:hover::before {
-            left: 100%;
-        }
-
-        .tool-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .copy-btn {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            color: var(--primary);
-            padding: 0.5rem 0.7rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .copy-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: scale(1.1);
-        }
-
-        .copy-btn.copied {
-            animation: copyPulse 0.4s ease;
-        }
-
-        @keyframes copyPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .tool-description {
-            color: var(--muted-text);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .terminal-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 8px;
-            padding: 1.2rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            overflow-x: auto;
-            color: var(--success);
-            line-height: 1.6;
-        }
-
-        .terminal-prompt {
-            color: var(--primary);
-            margin-right: 0.5rem;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: linear-gradient(135deg, var(--success), var(--primary));
-            color: var(--dark-bg);
-            padding: 1.2rem 1.8rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transform: translateY(150px);
-            opacity: 0;
-            transition: var(--transition);
-            font-weight: 600;
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-            z-index: 2000;
-        }
-
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 5rem;
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            text-align: center;
-            color: var(--muted-text);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-links a:hover {
-            transform: translateY(-3px);
-            text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Sidebar Styles */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            z-index: 999;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        .tools-sidebar, .extensions-sidebar {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 400px;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.9));
-            border-left: 1px solid rgba(0, 212, 255, 0.2);
-            backdrop-filter: blur(10px);
-            overflow-y: auto;
-            z-index: 1001;
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-top: 80px;
-            box-shadow: -10px 0 40px rgba(0, 212, 255, 0.1);
-        }
-
-        .tools-sidebar.active, .extensions-sidebar.active {
-            right: 0;
-        }
-
-        .sidebar-header {
-            padding: 2rem;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15, 15, 30, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .close-sidebar, .close-extensions-sidebar {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            color: var(--primary);
-            padding: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-sidebar:hover, .close-extensions-sidebar:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: scale(1.1);
-        }
-
-        .tools-list, .extensions-list {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .tool-item {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .tool-item:hover {
-            border-color: var(--primary);
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(-8px);
-        }
-
-        .tool-item h3 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-        }
-
-        .tool-item p {
-            color: var(--muted-text);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .tool-item a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: var(--success);
-            text-decoration: none;
-            padding: 0.6rem 1rem;
-            background: rgba(0, 212, 170, 0.1);
-            border-radius: 6px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .tool-item a:hover {
-            background: rgba(0, 212, 170, 0.2);
-            transform: translateX(4px);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .search-form {
-                flex-direction: column;
-            }
-
-            .search-input {
-                min-width: 100%;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-                padding: 1rem;
-            }
-
-            .container {
-                margin-top: 5rem;
-            }
-
-            .tools-sidebar, .extensions-sidebar {
-                width: 100%;
-                right: -100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="#" class="logo">
+        <a href="./index.html" class="logo">
             <i class="fas fa-crosshairs"></i>
             DorkVault
         </a>
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="#subdomain">Subdomains</a></li>
-                <li><a href="#urls">URLs</a></li>
-                <li><a href="#sensitive">Sensitive Data</a></li>
-                <li><a href="#xss">XSS</a></li>
-                <li><a href="#lfi">LFI</a></li>
-                <li><a href="#cors">CORS</a></li>
-                <li><a href="#wordpress">WordPress</a></li>
+                <li><a href="./index.html#subdomain">Subdomains</a></li>
+                <li><a href="./index.html#urls">URLs</a></li>
+                <li><a href="./index.html#sensitive">Sensitive Data</a></li>
+                <li><a href="./index.html#xss">XSS</a></li>
+                <li><a href="./index.html#lfi">LFI</a></li>
+                <li><a href="./index.html#cors">CORS</a></li>
+                <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
-                <li><a href="#" id="extensions-link-nav">Extensions</a></li>
+                <li><a href="#" id="tools-link">Tools</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Tools Sidebar -->
+    <div class="tools-sidebar">
+        <div class="sidebar-header">
+            <h2>Security Tools</h2>
+            <button class="close-sidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="tools-list"></div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
 
     <div class="container">
         <!-- Hero Section -->
@@ -1279,10 +678,13 @@
             setTimeout(() => notification.classList.remove('show'), 2500);
         }
 
-        // Sidebar Functionality
+        // Sidebar Functionality - Combined for Extensions and Tools
         const extensionsLinkNav = document.getElementById('extensions-link-nav');
         const extensionsSidebar = document.querySelector('.extensions-sidebar');
         const closeExtensionsSidebar = document.querySelector('.close-extensions-sidebar');
+        const toolsLink = document.getElementById('tools-link');
+        const toolsSidebar = document.querySelector('.tools-sidebar');
+        const closeSidebar = document.querySelector('.close-sidebar');
         const sidebarOverlay = document.querySelector('.sidebar-overlay');
 
         function toggleExtensionsSidebar() {
@@ -1290,6 +692,12 @@
             extensionsSidebar.classList.toggle('active');
             if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
             document.body.style.overflow = extensionsSidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function toggleToolsSidebar() {
+            if (!toolsSidebar) return;
+            toolsSidebar.classList.toggle('active');
+            if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
         }
 
         // Handle navbar Extensions link
@@ -1304,11 +712,26 @@
             closeExtensionsSidebar.addEventListener('click', toggleExtensionsSidebar);
         }
 
-        // Sidebar overlay click to close
+        // Handle navbar Tools link
+        if (toolsLink) {
+            toolsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleToolsSidebar();
+            });
+        }
+
+        if (closeSidebar) {
+            closeSidebar.addEventListener('click', toggleToolsSidebar);
+        }
+
+        // Sidebar overlay click to close either sidebar
         if (sidebarOverlay) {
             sidebarOverlay.addEventListener('click', function() {
                 if (extensionsSidebar && extensionsSidebar.classList.contains('active')) {
                     toggleExtensionsSidebar();
+                }
+                if (toolsSidebar && toolsSidebar.classList.contains('active')) {
+                    toggleToolsSidebar();
                 }
             });
         }
@@ -1319,11 +742,63 @@
                 if (extensionsSidebar && extensionsSidebar.classList.contains('active')) {
                     toggleExtensionsSidebar();
                 }
+                if (toolsSidebar && toolsSidebar.classList.contains('active')) {
+                    toggleToolsSidebar();
+                }
             }
         });
 
         // Initialize with example.com
         updateCommands('example.com');
+
+        // Security Tools data
+        const securityTools = [
+            { subtitle: 'Subfinder', info: 'Subdomain discovery and enumeration tool', downloadLink: 'https://github.com/projectdiscovery/subfinder' },
+            { subtitle: 'HTTPx', info: 'HTTP probe with multiple features', downloadLink: 'https://github.com/projectdiscovery/httpx' },
+            { subtitle: 'Katana', info: 'Next-gen crawling and spidering framework', downloadLink: 'https://github.com/projectdiscovery/katana' },
+            { subtitle: 'Nuclei', info: 'Fast customisable vulnerability scanner', downloadLink: 'https://github.com/projectdiscovery/nuclei' },
+            { subtitle: 'SSRFmap', info: 'SSRF testing and exploitation tool', downloadLink: 'https://github.com/swisskyrepo/SSRFmap' },
+            { subtitle: 'Ghauri', info: 'Advanced SQL injection detection tool', downloadLink: 'https://github.com/r0oth3x49/ghauri' },
+            { subtitle: 'Amass', info: 'In-depth DNS enumeration and mapping', downloadLink: 'https://github.com/OWASP/Amass' },
+            { subtitle: 'Assetfinder', info: 'Find domains and subdomains quickly', downloadLink: 'https://github.com/tomnomnom/assetfinder' },
+            { subtitle: 'Masscan', info: 'TCP port scanner with high speed', downloadLink: 'https://github.com/robertdavidgraham/masscan' },
+            { subtitle: 'Hakrawler', info: 'Web crawler for discovering endpoints', downloadLink: 'https://github.com/hakluke/hakrawler' },
+            { subtitle: 'URLFinder', info: 'Advanced URL extraction and discovery', downloadLink: 'https://github.com/projectdiscovery/urlfinder' },
+            { subtitle: 'LinkFinder', info: 'Extract endpoints from JavaScript files', downloadLink: 'https://github.com/GerbenJavado/LinkFinder' },
+            { subtitle: 'Waybackurls', info: 'Fetch URLs from Wayback Machine', downloadLink: 'https://github.com/tomnomnom/waybackurls' },
+            { subtitle: 'x8', info: 'Hidden parameters discovery tool', downloadLink: 'https://github.com/Sh1Yo/x8' },
+            { subtitle: 'Commix', info: 'Automated injection testing framework', downloadLink: 'https://github.com/commixproject/commix' },
+            { subtitle: 'DotDotPwn', info: 'LFI/RFI vulnerability scanner', downloadLink: 'https://github.com/wireghoul/dotdotpwn' },
+            { subtitle: 'LFISuite', info: 'Local File Inclusion exploitation suite', downloadLink: 'https://github.com/D35m0nd142/LFISuite' },
+            { subtitle: 'SSTImap', info: 'Server-Side Template Injection scanner', downloadLink: 'https://github.com/vladko312/SSTImap' },
+            { subtitle: 'S3Scanner', info: 'S3 bucket discovery and enumeration', downloadLink: 'https://github.com/sa7mon/S3Scanner' },
+            { subtitle: 'gf', info: 'A wrapper around grep for patterns', downloadLink: 'https://github.com/tomnomnom/gf' }
+        ];
+
+        // Function to render security tools in the sidebar
+        function renderSecurityTools() {
+            const toolsList = document.querySelector('.tools-sidebar .tools-list');
+            if (!toolsList) return;
+            toolsList.innerHTML = '';
+            
+            securityTools.forEach(tool => {
+                const toolItem = document.createElement('div');
+                toolItem.className = 'tool-item';
+                
+                toolItem.innerHTML = `
+                    <h3>${tool.subtitle}</h3>
+                    <p>${tool.info}</p>
+                    <a href="${tool.downloadLink}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                `;
+                
+                toolsList.appendChild(toolItem);
+            });
+        }
+
+        // Render tools on page load
+        renderSecurityTools();
     </script>
 </body>
 </html>
