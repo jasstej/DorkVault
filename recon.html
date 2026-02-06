@@ -452,12 +452,6 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .row {
-                grid-width: 100%;
-            }
-        }
-
         @media (max-width: 480px) {
             .row {
                 grid-template-columns: 1fr;
@@ -553,31 +547,7 @@
     </style>
 </head>
 <body>
-    <!-- Intro Animation -->
-    <div class="intro-container" id="introContainer">
-        <div class="intro-content">
-            <div class="intro-logo">
-                <svg class="spider-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="30" r="8" fill="#00d4ff"/>
-                    <circle cx="50" cy="50" r="12" fill="#00d4ff"/>
-                    <circle cx="50" cy="75" r="6" fill="#00d4ff"/>
-                    <!-- Spider legs -->
-                    <line x1="50" y1="30" x2="30" y2="15" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="30" x2="70" y2="15" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="20" y2="35" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="80" y2="35" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="20" y2="65" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="80" y2="65" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="75" x2="30" y2="90" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="50" y1="75" x2="70" y2="90" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="intro-text">
-                <h1>DORKVAULT</h1>
-            </div>
-        </div>
-    </div>
-
+    
     <nav class="navbar">
         <div class="navbar-content">
             <div class="navbar-brand-content">
@@ -611,46 +581,46 @@
                             Subdomain Enumeration
                         </h5>
                         <div class="tool-actions">
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://crt.sh/?q=%.example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://crt.sh/?q=%.example.com')">
                                 crt.sh <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://dorki.attaxa.com/search?q=site:example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://dorki.attaxa.com/search?q=site:example.com')">
                                 dorki.attaxa.com <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://securitytrails.com/list/apex_domain/example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://securitytrails.com/list/apex_domain/example.com')">
                                 SecurityTrails <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://www.vedbex.com/subdomain-finder/example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://www.vedbex.com/subdomain-finder/example.com')">
                                 vedbex.com <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://viewdns.info/reverseip/?host=example.com&amp;t=1')">
+                            <button class="btn-tool" onclick="subdomainDork('https://viewdns.info/reverseip/?host=example.com&amp;t=1')">
                                 viewdns.info <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://google.com/search?q=site:*.example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://google.com/search?q=site:*.example.com')">
                                 *.google <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://search.censys.io/search?resource=hosts&amp;sort=RELEVANCE&amp;per_page=25&amp;virtual_hosts=EXCLUDE&amp;q=example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://search.censys.io/search?resource=hosts&amp;sort=RELEVANCE&amp;per_page=25&amp;virtual_hosts=EXCLUDE&amp;q=example.com')">
                                 search.censys.io <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://www.shodan.io/search?query=example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://www.shodan.io/search?query=example.com')">
                                 shodan.io <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://www.bing.com/search?q=domain:example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://www.bing.com/search?q=domain:example.com')">
                                 Bing <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original')">
+                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original')">
                                 web-archive secret <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://www.virustotal.com/gui/domain/example.com/relations')">
+                            <button class="btn-tool" onclick="subdomainDork('https://www.virustotal.com/gui/domain/example.com/relations')">
                                 VirusTotal <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://dnsdumpster.com/?target=example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://dnsdumpster.com/?target=example.com')">
                                 DNSdumpster <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://hackertarget.com/subdomain-finder/?domain=example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://hackertarget.com/subdomain-finder/?domain=example.com')">
                                 HackerTarget <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://sitereport.netcraft.com/?url=example.com')">
+                            <button class="btn-tool" onclick="subdomainDork('https://sitereport.netcraft.com/?url=example.com')">
                                 Netcraft <span class="status-badge">Active</span>
                             </button>
                         </div>
@@ -667,19 +637,19 @@
                             Secret Discovery
                         </h5>
                         <div class="tool-actions">
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\\.(xls|xml|xlsx|json|pdf|sql|doc|docx|pptx|txt|git|zip|tar\\.gz|tgz|bak|7z|rar|log|cache|secret|db|backup|yml|gz|config|csv|yaml|md|md5|exe|dll|bin|ini|bat|sh|tar|deb|rpm|iso|img|env|apk|msi|dmg|tmp|crt|pem|key|pub|asc)$')">
+                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\\.(xls|xml|xlsx|json|pdf|sql|doc|docx|pptx|txt|git|zip|tar\\.gz|tgz|bak|7z|rar|log|cache|secret|db|backup|yml|gz|config|csv|yaml|md|md5|exe|dll|bin|ini|bat|sh|tar|deb|rpm|iso|img|env|apk|msi|dmg|tmp|crt|pem|key|pub|asc)$')">
                                 web.archive.org (Sensitive Files) <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original')">
+                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original')">
                                 web.archive.org (All URLs) <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://otx.alienvault.com/api/v1/indicators/hostname/example.com/url_list?limit=500&amp;page=1')">
+                            <button class="btn-tool" onclick="subdomainDork('https://otx.alienvault.com/api/v1/indicators/hostname/example.com/url_list?limit=500&amp;page=1')">
                                 AlienVault OTX URL List <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\.js$')">
+                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\.js$')">
                                 JS FILES <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://gist.github.com/search?q=example.com+apikey&amp;type=gists')">
+                            <button class="btn-tool" onclick="subdomainDork('https://gist.github.com/search?q=example.com+apikey&amp;type=gists')">
                                 GitHub Gists API Keys <span class="status-badge">Active</span>
                             </button>
                             <button class="btn-tool" onclick="secretsDork('site:example.com (password OR secret OR credential OR token OR apikey OR api_key OR client_secret) ext:env OR ext:yml OR ext:yaml OR ext:txt OR ext:log')">
@@ -691,10 +661,10 @@
                             <button class="btn-tool" onclick="secretsDork('site:example.com (authorization:Bearer OR authorization:Basic OR authorization:AWS) ext:log OR ext:txt OR ext:env')">
                                 Authorization Tokens <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\.env$')">
+                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;collapse=urlkey&amp;output=text&amp;fl=original&amp;filter=original:.*\.env$')">
                                 .ENV <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="subdomainDork('https://web.archive.org/web/20251113053913/https://www.shodan.io/search?query=Ssl.cert.subject.CN:%22example.com%22+200')">
+                            <button class="btn-tool" onclick="subdomainDork('https://www.shodan.io/search?query=Ssl.cert.subject.CN:%22example.com%22+200')">
                                 SSL Certificate CN Search <span class="status-badge">Active</span>
                             </button>
                         </div>
@@ -729,7 +699,7 @@
                             <button class="btn-tool" onclick="robotsTxt()">
                                 Robots.txt Analysis <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="urlDork('https://web.archive.org/web/20251113053913/https://www.virustotal.com/gui/domain/example.com/urls')">
+                            <button class="btn-tool" onclick="urlDork('https://www.virustotal.com/gui/domain/example.com/urls')">
                                 VirusTotal URLs <span class="status-badge">Active</span>
                             </button>
                         </div>
@@ -769,16 +739,16 @@
                             Technology Detection
                         </h5>
                         <div class="tool-actions">
-                            <button class="btn-tool" onclick="gitDork('https://web.archive.org/web/20251113053913/https://builtwith.com/example.com')">
+                            <button class="btn-tool" onclick="gitDork('https://builtwith.com/example.com')">
                                 builtwith.com <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="gitDork('https://web.archive.org/web/20251113053913/https://webtechsurvey.com/website/example.com')">
+                            <button class="btn-tool" onclick="gitDork('https://webtechsurvey.com/website/example.com')">
                                 webtechsurvey.com <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="gitDork('https://web.archive.org/web/20251113053913/https://w3techs.com/sites/info/example.com')">
+                            <button class="btn-tool" onclick="gitDork('https://w3techs.com/sites/info/example.com')">
                                 w3techs.com <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="techDork('https://web.archive.org/web/20251113053913/https://whatcms.org/?s=example.com')">
+                            <button class="btn-tool" onclick="techDork('https://whatcms.org/?s=example.com')">
                                 whatcms.org <span class="status-badge">Active</span>
                             </button>
                         </div>
@@ -795,13 +765,13 @@
                             Port Scanning
                         </h5>
                         <div class="tool-actions">
-                            <button class="btn-tool" onclick="portDork('https://web.archive.org/web/20251113053913/https://viewdns.info/portscan/?host=example.com')">
+                            <button class="btn-tool" onclick="portDork('https://viewdns.info/portscan/?host=example.com')">
                                 viewdns.info <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="portDork('https://web.archive.org/web/20251113053913/https://dnschecker.org/port-scanner.php?query=example.com&amp;ptype=server')">
+                            <button class="btn-tool" onclick="portDork('https://dnschecker.org/port-scanner.php?query=example.com&amp;ptype=server')">
                                 dnschecker.org <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="portDork('https://web.archive.org/web/20251113053913/https://web-check.xyz/check/example.com')">
+                            <button class="btn-tool" onclick="portDork('https://web-check.xyz/check/example.com')">
                                 web-check.xyz <span class="status-badge">Active</span>
                             </button>
                         </div>
@@ -818,10 +788,10 @@
                             URL Collection
                         </h5>
                         <div class="tool-actions">
-                            <button class="btn-tool" onclick="urlDork('https://web.archive.org/web/20251113053913/https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;output=txt&amp;collapse=urlkey&amp;fl=original&amp;page=/')">
+                            <button class="btn-tool" onclick="urlDork('https://web.archive.org/cdx/search/cdx?url=*.example.com/*&amp;output=txt&amp;collapse=urlkey&amp;fl=original&amp;page=/')">
                                 web.archive.org <span class="status-badge">Active</span>
                             </button>
-                            <button class="btn-tool" onclick="urlDork('https://web.archive.org/web/20251113053913/https://urlscan.io/api/v1/search/?q=example.com&amp;size=10000')">
+                            <button class="btn-tool" onclick="urlDork('https://urlscan.io/api/v1/search/?q=example.com&amp;size=10000')">
                                 urlscan.io <span class="status-badge">Active</span>
                             </button>
                         </div>
