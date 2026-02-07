@@ -1492,3 +1492,245 @@ footer {
         margin-bottom: 0.8rem;
     }
 }
+/* All Tools Section Styles */
+#all-tools {
+    margin: 4rem 0;
+}
+
+.tools-info-box {
+    background: linear-gradient(135deg, var(--dark-tertiary) 0%, var(--dark-secondary) 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.tools-info-box p {
+    color: var(--light-text);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.tools-info-box code {
+    background: var(--dark);
+    color: var(--success);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+}
+
+.installation-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-install {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--dark);
+    border: 2px solid var(--primary);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn-install:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+}
+
+.tools-category-header {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin: 2.5rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--border);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.tools-grid-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tool-badge {
+    position: relative;
+    background: linear-gradient(135deg, var(--dark-tertiary) 0%, var(--dark-secondary) 100%);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.tool-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.tool-badge:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(0, 212, 255, 0.05);
+    transform: translateY(-8px);
+}
+
+.tool-badge:hover::before {
+    left: 100%;
+}
+
+.tool-badge-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    transition: var(--transition);
+}
+
+.tool-badge:hover .tool-badge-icon {
+    color: var(--secondary);
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 10px var(--secondary));
+}
+
+.tool-badge-name {
+    font-weight: 700;
+    color: var(--light-text);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.tool-badge:hover .tool-badge-name {
+    color: var(--secondary);
+    text-shadow: 0 0 10px var(--secondary);
+}
+
+.tool-badge-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 1rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 100;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-size: 0.85rem;
+    color: var(--light-text);
+}
+
+.tool-badge:hover .tool-badge-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.tool-badge-tooltip strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.tool-badge-tooltip a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    margin: 0 0.3rem;
+}
+
+.tool-badge-tooltip a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .tools-grid-display {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 1rem;
+    }
+
+    .tool-badge {
+        padding: 1rem 0.8rem;
+    }
+
+    .tool-badge-icon {
+        font-size: 2rem;
+    }
+
+    .tool-badge-name {
+        font-size: 0.85rem;
+    }
+
+    .tool-badge-tooltip {
+        white-space: normal;
+        width: 200px;
+        font-size: 0.75rem;
+    }
+
+    .installation-buttons {
+        flex-direction: column;
+    }
+
+    .btn-install {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .tools-grid-display {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .tool-badge {
+        padding: 0.8rem;
+    }
+
+    .tool-badge-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .tools-category-header {
+        font-size: 1.1rem;
+        margin: 1.5rem 0 1rem 0;
+    }
+
+    .tools-info-box {
+        padding: 1rem;
+    }
+
+    .tools-info-box p {
+        font-size: 0.85rem;
+    }
+}

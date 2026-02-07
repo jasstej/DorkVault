@@ -24,9 +24,10 @@
                 <li><a href="./index.html#lfi">LFI</a></li>
                 <li><a href="./index.html#cors">CORS</a></li>
                 <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./index.html#all-tools">Tools</a></li>
                 <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
-                <li><a href="#" id="tools-link">Tools</a></li>
+                <li><a href="./advanced-dorks.html">Advanced Dorks</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
@@ -79,7 +80,7 @@
                     <p class="tool-description">Discover subdomains using recursive enumeration</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="subdomain-1">subfinder -d example.com -all -recursive</span>
+                        <span id="subdomain-1">subfinder -d example.com -all -recursive -o subdomains.txt</span>
                     </div>
                 </div>
 
@@ -93,21 +94,49 @@
                     <p class="tool-description">Find domains and subdomains quickly</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="subdomain-2">assetfinder --subs-only example.com</span>
+                        <span id="subdomain-2">assetfinder --subs-only example.com > assetfinder.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">Certificate Transparency (crt.sh)</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('subdomain-3')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Find subdomains via certificate transparency logs</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="subdomain-3">curl -s "https://crt.sh/?q=example.com&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u > crtsh.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">Merge & De-duplicate All Subdomains</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('subdomain-4')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Always combine outputs before probing</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="subdomain-4">cat subdomains.txt assetfinder.txt crtsh.txt | sort -u > all_subdomains.txt</span>
                     </div>
                 </div>
 
                 <div class="tool-card">
                     <div class="tool-header">
                         <h3 class="tool-title">Live Subdomain Check</h3>
-                        <button class="copy-btn" onclick="copyToClipboard('subdomain-3')">
+                        <button class="copy-btn" onclick="copyToClipboard('subdomain-5')">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
                     <p class="tool-description">Filter alive subdomains with httpx</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="subdomain-3">echo example.com | httpx -silent</span>
+                        <span id="subdomain-5">cat all_subdomains.txt | httpx -silent -o subdomains_alive.txt</span>
                     </div>
                 </div>
             </div>
@@ -131,7 +160,7 @@
                     <p class="tool-description">Advanced crawling with multiple sources</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="url-1">katana -u https://example.com -d 5 -ps</span>
+                        <span id="url-1">katana -l subdomains_alive.txt -d 5 -ps -o allurls.txt</span>
                     </div>
                 </div>
 
@@ -145,7 +174,7 @@
                     <p class="tool-description">Fetch URLs from multiple archives</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="url-2">echo example.com | gau | urldedupe</span>
+                        <span id="url-2">cat subdomains_alive.txt | gau | urldedupe >> allurls.txt</span>
                     </div>
                 </div>
 
@@ -159,7 +188,7 @@
                     <p class="tool-description">Extract URLs with parameters</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="url-3">cat urls.txt | grep '=' | sort -u</span>
+                        <span id="url-3">cat allurls.txt | grep '=' | sort -u > urls_with_params.txt</span>
                     </div>
                 </div>
             </div>
@@ -183,7 +212,7 @@
                     <p class="tool-description">Find exposed sensitive files</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="sensitive-1">grep -E '\.(bak|sql|zip|conf|env|key)$'</span>
+                        <span id="sensitive-1">cat allurls.txt | grep -E '\.(bak|sql|zip|conf|env|key)$' > sensitive_findings.txt</span>
                     </div>
                 </div>
 
@@ -197,7 +226,7 @@
                     <p class="tool-description">Discover S3 buckets</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="sensitive-2">s3scanner scan -d example.com</span>
+                        <span id="sensitive-2">s3scanner scan -d example.com -o s3_buckets.txt</span>
                     </div>
                 </div>
 
@@ -211,7 +240,49 @@
                     <p class="tool-description">Detect exposed git repos</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="sensitive-3">httpx -path '/.git/' -mc 200</span>
+                        <span id="sensitive-3">cat allurls.txt | httpx -path '/.git/' -mc 200 -o git_repos.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">Information Disclosure Scanner</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('sensitive-4')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Checks for information disclosure vulnerabilities using a scanner</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="sensitive-4">cat allurls.txt | grep -E "\.(xls|xml|xlsx|json|pdf|sql|doc|docx|pptx|txt|zip|tar\.gz|tgz|bak|7z|rar|log|cache|secret|db|backup|yml|gz|config|csv|yaml|md|md5|tar|xz|7zip|p12|pem|key|crt|csr|sh|pl|py|java|class|jar|war|ear|sqlitedb|sqlite3|dbf|db3|accdb|mdb|sqlcipher|gitignore|env|ini|conf|properties|plist|cfg)$" > sensitive_disclosure.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">AWS S3 Bucket Finder</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('sensitive-5')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Searches for AWS S3 buckets associated with the target</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="sensitive-5">s3scanner scan -d example.com -o s3_buckets_full.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">API Key Finder</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('sensitive-6')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Searches for exposed API keys and tokens in JavaScript files</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="sensitive-6">cat allurls.txt | grep -E "\.js$" | httpx -mc 200 -content-type | grep -E "application/javascript|text/javascript" | cut -d' ' -f1 | xargs -I{} curl -s {} | grep -E "(API_KEY|api_key|apikey|secret|token|password)" > api_keys.txt</span>
                     </div>
                 </div>
             </div>
@@ -235,7 +306,7 @@
                     <p class="tool-description">Comprehensive XSS hunting</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="xss-1">echo https://example.com | gau | gf xss | Gxss</span>
+                        <span id="xss-1">cat allurls.txt | gf xss | Gxss | tee xss_findings.txt</span>
                     </div>
                 </div>
 
@@ -249,7 +320,7 @@
                     <p class="tool-description">Advanced XSS vulnerability scanner</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="xss-2">dalfox url https://example.com/page.php?q=test</span>
+                        <span id="xss-2">cat urls_with_params.txt | dalfox pipe -o xss_dalfox.txt</span>
                     </div>
                 </div>
 
@@ -263,11 +334,26 @@
                     <p class="tool-description">Find stored XSS in forms</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="xss-3">nuclei -t nuclei-xss-template -u https://example.com</span>
+                        <span id="xss-3">nuclei -l allurls.txt -t xss -o xss_nuclei.txt</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h3 class="tool-title">DOM XSS Detection</h3>
+                        <button class="copy-btn" onclick="copyToClipboard('xss-4')">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="tool-description">Detects potential DOM-based XSS vulnerabilities</p>
+                    <div class="terminal-box">
+                        <span class="terminal-prompt">$</span>
+                        <span id="xss-4">cat allurls.txt | grep -E "\.js$" > js_files.txt && cat js_files.txt | Gxss -c 100 | sort -u | dalfox pipe -o dom_xss_results.txt</span>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- LFI Section -->
         <section id="lfi">
@@ -287,7 +373,7 @@
                     <p class="tool-description">Find LFI vulnerable parameters</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="lfi-1">echo example.com | gau | gf lfi | uro</span>
+                        <span id="lfi-1">cat allurls.txt | gf lfi | uro > lfi_findings.txt</span>
                     </div>
                 </div>
 
@@ -301,7 +387,7 @@
                     <p class="tool-description">Fuzz for LFI vulnerabilities</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="lfi-2">ffuf -u https://example.com/page?file=FUZZ -w lfi-wordlist.txt</span>
+                        <span id="lfi-2">ffuf -l lfi_findings.txt -w payloads/lfi.txt -mr "root:" -o lfi_results.json</span>
                     </div>
                 </div>
 
@@ -315,7 +401,7 @@
                     <p class="tool-description">Test path traversal payloads</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="lfi-3">curl 'https://example.com/file?path=../../../../etc/passwd'</span>
+                        <span id="lfi-3">cat lfi_findings.txt | head -1 | xargs -I{} curl -s '{}' > lfi_test.txt</span>
                     </div>
                 </div>
             </div>
@@ -339,7 +425,7 @@
                     <p class="tool-description">Check CORS policy of a website</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="cors-1">curl -H "Origin: http://example.com" -I https://example.com/wp-json/</span>
+                        <span id="cors-1">cat subdomains_alive.txt | head -1 | xargs -I{} curl -I -H "Origin: http://example.com" {} > cors_check.txt</span>
                     </div>
                 </div>
 
@@ -353,7 +439,7 @@
                     <p class="tool-description">Fast CORS misconfiguration scanner</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="cors-2">python3 CORScanner.py -u https://example.com -d -t 10</span>
+                        <span id="cors-2">python3 CORScanner.py -u subdomains_alive.txt -d -t 10 -o cors_results.txt</span>
                     </div>
                 </div>
 
@@ -367,7 +453,7 @@
                     <p class="tool-description">Scan for CORS misconfigurations</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="cors-3">cat domains.txt | httpx -silent | nuclei -t nuclei-templates/vulnerabilities/cors/ -o cors_results.txt</span>
+                        <span id="cors-3">cat subdomains_alive.txt | httpx -silent | nuclei -t cors -o cors_findings.txt</span>
                     </div>
                 </div>
             </div>
@@ -391,7 +477,7 @@
                     <p class="tool-description">Comprehensive WordPress vulnerability scan</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="wordpress-1">wpscan --url https://example.com --disable-tls-checks --enumerate at,ap,u --plugins-detection aggressive --force</span>
+                        <span id="wordpress-1">cat subdomains_alive.txt | grep -i "wordpress\|wp-" | head -1 | xargs -I{} wpscan --url {} --disable-tls-checks -e at,ap,u -o wordpress_scan.json</span>
                     </div>
                 </div>
 
@@ -405,7 +491,7 @@
                     <p class="tool-description">Identify WordPress themes and vulnerabilities</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="wordpress-2">wpscan --url https://example.com --no-banner -e t --plugins-detection aggressive</span>
+                        <span id="wordpress-2">wpscan --url https://example.com --no-banner -e t -o theme_results.json</span>
                     </div>
                 </div>
 
@@ -419,7 +505,249 @@
                     <p class="tool-description">Enumerate WordPress users and plugins</p>
                     <div class="terminal-box">
                         <span class="terminal-prompt">$</span>
-                        <span id="wordpress-3">wpscan --url https://example.com -e u -e ap --enumerate-timeless-vulnerability</span>
+                        <span id="wordpress-3">wpscan --url https://example.com -e u,ap -o wordpress_full.json</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Tools Installation Section -->
+        <section id="all-tools">
+            <h2 class="section-title">
+                <i class="fas fa-tools"></i>
+                All Security Tools
+            </h2>
+            
+            <div class="tools-info-box">
+                <p><strong>Download & Install Script:</strong> These tools are included in the <code>install-all-tools.sh</code> script</p>
+                <div class="installation-buttons">
+                    <a href="install-all-tools.sh" class="btn-install" download>
+                        <i class="fas fa-download"></i> Download Install Script
+                    </a>
+                    <a href="update-all-tools.sh" class="btn-install" download>
+                        <i class="fas fa-sync"></i> Download Update Script
+                    </a>
+                </div>
+            </div>
+
+            <!-- Go-based Tools -->
+            <h3 class="tools-category-header">
+                <i class="fas fa-code"></i> Go-based Tools
+            </h3>
+            <div class="tools-grid-display">
+                <div class="tool-badge" data-tool="subfinder" title="Subdomain enumeration and reconnaissance">
+                    <div class="tool-badge-icon"><i class="fas fa-search"></i></div>
+                    <div class="tool-badge-name">Subfinder</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Subfinder</strong><br>
+                        Fast passive subdomain enumeration tool<br>
+                        <a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener">GitHub</a> | 
+                        <a href="https://docs.projectdiscovery.io/tools/subfinder" target="_blank" rel="noopener">Docs</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="httpx" title="HTTP probing with multiple features">
+                    <div class="tool-badge-icon"><i class="fas fa-globe"></i></div>
+                    <div class="tool-badge-name">HTTPx</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>HTTPx</strong><br>
+                        Fast HTTP prober with multiple features<br>
+                        <a href="https://github.com/projectdiscovery/httpx" target="_blank" rel="noopener">GitHub</a> | 
+                        <a href="https://docs.projectdiscovery.io/tools/httpx" target="_blank" rel="noopener">Docs</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="katana" title="Next-gen crawling and spidering framework">
+                    <div class="tool-badge-icon"><i class="fas fa-spider"></i></div>
+                    <div class="tool-badge-name">Katana</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Katana</strong><br>
+                        Next-generation web crawler and endpoint finder<br>
+                        <a href="https://github.com/projectdiscovery/katana" target="_blank" rel="noopener">GitHub</a> | 
+                        <a href="https://docs.projectdiscovery.io/tools/katana" target="_blank" rel="noopener">Docs</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="nuclei" title="Fast vulnerability scanner with templates">
+                    <div class="tool-badge-icon"><i class="fas fa-radiation"></i></div>
+                    <div class="tool-badge-name">Nuclei</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Nuclei</strong><br>
+                        Fast customizable vulnerability scanner<br>
+                        <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener">GitHub</a> | 
+                        <a href="https://docs.projectdiscovery.io/tools/nuclei" target="_blank" rel="noopener">Docs</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="assetfinder" title="Find domains and subdomains">
+                    <div class="tool-badge-icon"><i class="fas fa-compass"></i></div>
+                    <div class="tool-badge-name">Assetfinder</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Assetfinder</strong><br>
+                        Find all domains and subdomains owned by a given domain<br>
+                        <a href="https://github.com/tomnomnom/assetfinder" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="waybackurls" title="Fetch URLs from Wayback Machine">
+                    <div class="tool-badge-icon"><i class="fas fa-history"></i></div>
+                    <div class="tool-badge-name">Waybackurls</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Waybackurls</strong><br>
+                        Fetch all URLs from Wayback Machine for a domain<br>
+                        <a href="https://github.com/tomnomnom/waybackurls" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="gf" title="Grep patterns for URLs">
+                    <div class="tool-badge-icon"><i class="fas fa-filter"></i></div>
+                    <div class="tool-badge-name">GF</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>GF</strong><br>
+                        A wrapper around grep for patterns<br>
+                        <a href="https://github.com/tomnomnom/gf" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="amass" title="In-depth DNS enumeration">
+                    <div class="tool-badge-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="tool-badge-name">Amass</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Amass</strong><br>
+                        In-depth DNS enumeration and mapping<br>
+                        <a href="https://github.com/OWASP/Amass" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python-based Tools -->
+            <h3 class="tools-category-header">
+                <i class="fas fa-python"></i> Python-based Tools
+            </h3>
+            <div class="tools-grid-display">
+                <div class="tool-badge" data-tool="LinkFinder" title="Extract endpoints from JavaScript">
+                    <div class="tool-badge-icon"><i class="fas fa-link"></i></div>
+                    <div class="tool-badge-name">LinkFinder</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>LinkFinder</strong><br>
+                        Extract endpoints and URLs from JavaScript files<br>
+                        <a href="https://github.com/GerbenJavado/LinkFinder" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="commix" title="Automated injection testing">
+                    <div class="tool-badge-icon"><i class="fas fa-syringe"></i></div>
+                    <div class="tool-badge-name">Commix</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Commix</strong><br>
+                        Automated injection testing framework<br>
+                        <a href="https://github.com/commixproject/commix" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="ghauri" title="SQL injection detection tool">
+                    <div class="tool-badge-icon"><i class="fas fa-database"></i></div>
+                    <div class="tool-badge-name">Ghauri</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Ghauri</strong><br>
+                        Advanced SQL injection detection and exploitation<br>
+                        <a href="https://github.com/r0oth3x49/ghauri" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="paramspider" title="Parameter discovery tool">
+                    <div class="tool-badge-icon"><i class="fas fa-spider"></i></div>
+                    <div class="tool-badge-name">ParamSpider</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>ParamSpider</strong><br>
+                        Parameter discovery tool for security testing<br>
+                        <a href="https://github.com/devanshbatham/ParamSpider" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="wafw00f" title="WAF identification tool">
+                    <div class="tool-badge-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="tool-badge-name">WAFW00f</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>WAFW00f</strong><br>
+                        Identify and fingerprint WAFs<br>
+                        <a href="https://github.com/EnableSecurity/wafw00f" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="jwt-tool" title="JWT token analysis">
+                    <div class="tool-badge-icon"><i class="fas fa-key"></i></div>
+                    <div class="tool-badge-name">JWT-Tool</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>JWT-Tool</strong><br>
+                        JWT token testing and exploitation<br>
+                        <a href="https://github.com/ticarpi/jwt_tool" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="arjun" title="Parameter discovery">
+                    <div class="tool-badge-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="tool-badge-name">Arjun</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>Arjun</strong><br>
+                        HTTP parameter discovery tool<br>
+                        <a href="https://github.com/s0md3v/Arjun" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Tools -->
+            <h3 class="tools-category-header">
+                <i class="fab fa-github"></i> Advanced Tools
+            </h3>
+            <div class="tools-grid-display">
+                <div class="tool-badge" data-tool="S3Scanner" title="S3 bucket discovery">
+                    <div class="tool-badge-icon"><i class="fas fa-cube"></i></div>
+                    <div class="tool-badge-name">S3Scanner</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>S3Scanner</strong><br>
+                        Discover and exploit S3 buckets<br>
+                        <a href="https://github.com/sa7mon/S3Scanner" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="SSTImap" title="SSTI vulnerability scanner">
+                    <div class="tool-badge-icon"><i class="fas fa-map"></i></div>
+                    <div class="tool-badge-name">SSTImap</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>SSTImap</strong><br>
+                        Server-Side Template Injection scanner<br>
+                        <a href="https://github.com/vladko312/SSTImap" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="SSRFmap" title="SSRF testing and exploitation">
+                    <div class="tool-badge-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="tool-badge-name">SSRFmap</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>SSRFmap</strong><br>
+                        SSRF vulnerability testing and exploitation<br>
+                        <a href="https://github.com/swisskyrepo/SSRFmap" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="LFISuite" title="LFI exploitation suite">
+                    <div class="tool-badge-icon"><i class="fas fa-file"></i></div>
+                    <div class="tool-badge-name">LFISuite</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>LFISuite</strong><br>
+                        Local File Inclusion exploitation suite<br>
+                        <a href="https://github.com/D35m0nd142/LFISuite" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="tool-badge" data-tool="x8" title="Hidden parameters discovery">
+                    <div class="tool-badge-icon"><i class="fas fa-eye"></i></div>
+                    <div class="tool-badge-name">X8</div>
+                    <div class="tool-badge-tooltip">
+                        <strong>X8</strong><br>
+                        Hidden parameters and endpoints discovery<br>
+                        <a href="https://github.com/Sh1Yo/x8" target="_blank" rel="noopener">GitHub</a>
                     </div>
                 </div>
             </div>
