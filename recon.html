@@ -35,10 +35,10 @@
                 <li><a href="./index.html#lfi">LFI</a></li>
                 <li><a href="./index.html#cors">CORS</a></li>
                 <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./tools.html">Tools</a></li>
                 <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
                 <li><a href="./advanced-dorks.html">Advanced Dorks</a></li>
-                <li><a href="#" id="tools-link">Tools</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
@@ -59,6 +59,15 @@
     <div class="sidebar-overlay"></div>
 
     <div class="container py-3">
+        <!-- Header with Domain Input -->
+        <div style="text-align: center; margin-bottom: 3rem; margin-top: 2rem;">
+            <h1 style="font-size: 2.8rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d4ff, #00d4aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Advanced Reconnaissance Tools</h1>
+            <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Enter your target domain to fetch reconnaissance data from multiple sources</p>
+            <div style="max-width: 500px; margin: 0 auto; margin-bottom: 2rem;">
+                <input type="text" id="targetDomain" class="search-input" placeholder="Enter domain (e.g., example.com)" aria-label="Enter domain" style="width: 100%; padding: 12px 15px; border: 2px solid #00d4ff; background: rgba(15, 15, 30, 0.5); color: white; border-radius: 8px; font-size: 1rem; font-family: 'JetBrains Mono';">
+            </div>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
             <!-- Subdomain Enumeration -->
             <div class="col">
