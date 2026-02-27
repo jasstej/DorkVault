@@ -3,27 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DorkVault - Advanced Dorks Search</title>
+    <title>VulnScout - Advanced Dorks Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+   <nav class="navbar">
         <a href="./index.html" class="logo">
             <i class="fas fa-crosshairs"></i>
-            DorkVault
+            VulnScout
         </a>
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="./index.html#subdomain">Subdomains</a></li>
-                <li><a href="./index.html#urls">URLs</a></li>
-                <li><a href="./index.html#sensitive">Sensitive Data</a></li>
-                <li><a href="./index.html#xss">XSS</a></li>
-                <li><a href="./index.html#lfi">LFI</a></li>
-                <li><a href="./index.html#cors">CORS</a></li>
-                <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./index.html">Subdomains</a></li>
                 <li><a href="./tools.html">Tools</a></li>
                 <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
@@ -47,16 +41,19 @@
     <!-- Sidebar Overlay -->
     <div class="sidebar-overlay"></div>
 
-    <div class="container" style="margin-top: 6rem;">
-        <!-- Header -->
-        <div class="header">
-            <h1>Advanced Dork Search</h1>
-            <p>Comprehensive Parameter & Configuration Discovery Dorks</p>
-        </div>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Advanced Dork Search</h1>
+            <p class="hero-subtitle">Comprehensive Parameter & Configuration Discovery Dorks</p>
+            
+            <div class="search-form">
+                <input type="text" id="domainInput" class="search-input" placeholder="example.com" aria-label="Enter domain">
+            </div>
+        </section>
 
-        <!-- Search Box -->
+        <!-- Dorks Grid -->
         <div class="search-container">
-            <input type="text" id="domainInput" class="search-input" placeholder="Enter domain (e.g., example.com)" aria-label="Enter domain">
             <div class="dorks-grid" id="dorksGrid">
                 <!-- Dorks will be inserted here -->
             </div>
@@ -71,7 +68,7 @@
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">&copy; 2025 DorkVault - Advanced Bug Hunting Toolkit</p>
+        <p class="footer-text">&copy; 2025 VulnScout - Advanced Bug Hunting Toolkit</p>
         <div class="footer-links">
             <a href="https://github.com" target="_blank">
                 <i class="fab fa-github"></i> GitHub

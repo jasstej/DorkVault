@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################################
-# DorkVault - Universal Tool Installation & Update Script
+# VulnScout - Universal Tool Installation & Update Script
 # Installs all security reconnaissance tools and dependencies
 # Compatible with: Linux (Debian/Ubuntu), macOS
 ##############################################################################
@@ -287,7 +287,7 @@ verify_installations() {
 show_usage() {
     cat << EOF
 
-${BLUE}DorkVault Tool Installation Complete!${NC}
+${BLUE}VulnScout Tool Installation Complete!${NC}
 
 ${YELLOW}Quick Start Guide:${NC}
 
@@ -303,8 +303,8 @@ ${YELLOW}Quick Start Guide:${NC}
 4. Verify installations:
    ${BLUE}which subfinder httpx katana nuclei${NC}
 
-5. Start using DorkVault:
-   ${BLUE}cd c:\\Users\\spector\\Documents\\Tools\\DorkVault${NC}
+5. Start using VulnScout:
+   ${BLUE}cd c:\\Users\\spector\\Documents\\Tools\\VulnScout${NC}
 
 ${YELLOW}Important Notes:${NC}
 - Some tools require additional API keys (Shodan, SecurityTrails, etc.)
@@ -323,7 +323,7 @@ EOF
 
 # Main installation flow
 main() {
-    print_header "DorkVault - Universal Installation Script"
+    print_header "VulnScout - Universal Installation Script"
     echo "This script will install all security reconnaissance tools"
     echo ""
     

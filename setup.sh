@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################################
-# DorkVault - Quick Setup Script
+# VulnScout - Quick Setup Script
 # One-liner setup for impatient users
 ##############################################################################
 
@@ -12,7 +12,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo -e "${BLUE}Starting DorkVault Setup...${NC}\n"
+echo -e "${BLUE}Starting VulnScout Setup...${NC}\n"
 
 # Make scripts executable
 chmod +x "$(dirname "$0")/install-all-tools.sh"

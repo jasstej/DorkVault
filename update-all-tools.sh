@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################################
-# DorkVault - Tool Update & Upgrade Script
+# VulnScout - Tool Update & Upgrade Script
 # Updates and upgrades all installed security reconnaissance tools
 # Compatible with: Linux (Debian/Ubuntu), macOS
 ##############################################################################
@@ -223,7 +223,7 @@ ${GREEN}✓ All updates completed successfully!${NC}
 ${YELLOW}Next Steps:${NC}
 1. Reload your shell: ${BLUE}source ~/.bashrc${NC} (Linux) or ${BLUE}source ~/.zprofile${NC} (macOS)
 2. Verify tools: ${BLUE}subfinder --version${NC}
-3. Start scanning: ${BLUE}cd ~/DorkVault${NC}
+3. Start scanning: ${BLUE}cd ~/VulnScout${NC}
 
 ${YELLOW}Tips:${NC}
 - Update frequently using this script

@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Security-Policy" content="">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <title>DorkVault - Advanced Reconnaissance Toolkit</title>
+    <title>VulnScout - Advanced Reconnaissance Toolkit</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/spider.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -24,17 +24,11 @@
     <nav class="navbar">
         <a href="./index.html" class="logo">
             <i class="fas fa-crosshairs"></i>
-            DorkVault
+            VulnScout
         </a>
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="./index.html#subdomain">Subdomains</a></li>
-                <li><a href="./index.html#urls">URLs</a></li>
-                <li><a href="./index.html#sensitive">Sensitive Data</a></li>
-                <li><a href="./index.html#xss">XSS</a></li>
-                <li><a href="./index.html#lfi">LFI</a></li>
-                <li><a href="./index.html#cors">CORS</a></li>
-                <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./index.html">Subdomains</a></li>
                 <li><a href="./tools.html">Tools</a></li>
                 <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
@@ -58,15 +52,16 @@
     <!-- Sidebar Overlay -->
     <div class="sidebar-overlay"></div>
 
-    <div class="container py-3">
-        <!-- Header with Domain Input -->
-        <div style="text-align: center; margin-bottom: 3rem; margin-top: 2rem;">
-            <h1 style="font-size: 2.8rem; margin-bottom: 1rem; background: linear-gradient(135deg, #00d4ff, #00d4aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Advanced Reconnaissance Tools</h1>
-            <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Enter your target domain to fetch reconnaissance data from multiple sources</p>
-            <div style="max-width: 500px; margin: 0 auto; margin-bottom: 2rem;">
-                <input type="text" id="targetDomain" class="search-input" placeholder="Enter domain (e.g., example.com)" aria-label="Enter domain" style="width: 100%; padding: 12px 15px; border: 2px solid #00d4ff; background: rgba(15, 15, 30, 0.5); color: white; border-radius: 8px; font-size: 1rem; font-family: 'JetBrains Mono';">
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Advanced Reconnaissance Tools</h1>
+            <p class="hero-subtitle">Enter your target domain to fetch reconnaissance data from multiple sources</p>
+            
+            <div class="search-form">
+                <input type="text" id="targetDomain" class="search-input" placeholder="example.com" aria-label="Enter domain">
             </div>
-        </div>
+        </section>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
             <!-- Subdomain Enumeration -->
@@ -538,9 +533,9 @@
 
     <footer class="terminal-footer">
         <div class="footer-info">
-            <span>© 2025 DorkVault - Advanced Reconnaissance Toolkit</span>
+            <span>© 2025 VulnScout - Advanced Reconnaissance Toolkit</span>
             <span>|</span>
-            <a href="../DorkVault/index.html">Back to Main</a>
+            <a href="../VulnScout/index.html">Back to Main</a>
         </div>
     </footer>
 

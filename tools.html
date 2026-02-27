@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools - DorkVault</title>
+    <title>Tools - VulnScout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -17,20 +17,22 @@
         .tools-hero {
             text-align: center;
             padding: 60px 20px 40px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 110, 0.05) 100%);
-            border-bottom: 2px solid var(--primary);
+            background: transparent;
+            border-bottom: none;
             margin-bottom: 50px;
-            margin-top: 0;
+            margin-top: 6rem;
         }
 
         .tools-hero h1 {
             font-size: 3.5em;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary), var(--success), var(--primary));
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 700;
+            animation: gradientFlow 6s ease infinite;
         }
 
         .tools-hero p {
@@ -265,7 +267,7 @@
         }
 
         .quick-setup {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 110, 0.05) 100%);
+            background: var(--dark-secondary);
             border: 2px solid var(--primary);
             border-radius: 12px;
             padding: 30px;
@@ -286,13 +288,13 @@
 
         .setup-step {
             background: var(--dark-secondary);
-            border-left: 4px solid var(--secondary);
+            border-left: 4px solid var(--primary);
             padding: 15px;
             border-radius: 8px;
         }
 
         .setup-step h4 {
-            color: var(--secondary);
+            color: var(--primary);
             margin-bottom: 10px;
             font-size: 1.1em;
         }
@@ -340,17 +342,11 @@
     <nav class="navbar">
         <a href="./index.html" class="logo">
             <i class="fas fa-crosshairs"></i>
-            DorkVault
+            VulnScout
         </a>
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="./index.html#subdomain">Subdomains</a></li>
-                <li><a href="./index.html#urls">URLs</a></li>
-                <li><a href="./index.html#sensitive">Sensitive Data</a></li>
-                <li><a href="./index.html#xss">XSS</a></li>
-                <li><a href="./index.html#lfi">LFI</a></li>
-                <li><a href="./index.html#cors">CORS</a></li>
-                <li><a href="./index.html#wordpress">WordPress</a></li>
+                <li><a href="./index.html">Subdomains</a></li>
                 <li><a href="./tools.html">Tools</a></li>
                 <li><a href="./dorking.html">Dorking</a></li>
                 <li><a href="./recon.html">Recon</a></li>
@@ -375,10 +371,10 @@
             <div class="setup-steps">
                 <div class="setup-step">
                     <h4>Step 1: Clone & Navigate</h4>
-                    <p>Clone the DorkVault repository and navigate to the directory</p>
+                    <p>Clone the VulnScout repository and navigate to the directory</p>
                     <div class="command-box">
-                        <span>cd c:\Users\spector\Documents\Tools\DorkVault</span>
-                        <button class="copy-btn" onclick="copyToClipboard('cd c:\\Users\\spector\\Documents\\Tools\\DorkVault')">
+                        <span>cd c:\Users\spector\Documents\Tools\VulnScout</span>
+                        <button class="copy-btn" onclick="copyToClipboard('cd c:\\Users\\spector\\Documents\\Tools\\VulnScout')">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
@@ -1665,37 +1661,37 @@
         </div>
 
         <!-- API Keys & Configuration Section -->
-        <div style="background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%); border: 2px solid var(--secondary); border-radius: 12px; padding: 30px; margin-bottom: 50px;">
-            <h3 style="color: var(--secondary); margin-bottom: 20px; font-size: 1.5em;">
+        <div style="background: var(--dark-secondary); border: 2px solid var(--primary); border-radius: 12px; padding: 30px; margin-bottom: 50px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5em;">
                 <i class="fas fa-key"></i> API Keys & Configuration
             </h3>
             <p style="color: var(--muted-text); margin-bottom: 20px;">
                 Many tools require API keys for enhanced functionality. Configure them for better results:
             </p>
             <div class="setup-steps">
-                <div class="setup-step" style="border-left-color: var(--success);">
-                    <h4 style="color: var(--success);">Subfinder Providers</h4>
+                <div class="setup-step">
+                    <h4>Subfinder Providers</h4>
                     <p>Configure API keys for Shodan, SecurityTrails, and other providers in:</p>
                     <div class="command-box">
                         <span>~/.config/subfinder/provider-config.yaml</span>
                     </div>
                 </div>
-                <div class="setup-step" style="border-left-color: var(--success);">
-                    <h4 style="color: var(--success);">Tool Configuration</h4>
+                <div class="setup-step">
+                    <h4>Tool Configuration</h4>
                     <p>Store credentials and API keys in environment variables:</p>
                     <div class="command-box">
                         <span>export SHODAN_API_KEY="your_key_here"</span>
                     </div>
                 </div>
-                <div class="setup-step" style="border-left-color: var(--success);">
-                    <h4 style="color: var(--success);">AWS Credentials</h4>
+                <div class="setup-step">
+                    <h4>AWS Credentials</h4>
                     <p>Configure AWS credentials for S3Scanner:</p>
                     <div class="command-box">
                         <span>~/.aws/credentials</span>
                     </div>
                 </div>
-                <div class="setup-step" style="border-left-color: var(--success);">
-                    <h4 style="color: var(--success);">Update Tools</h4>
+                <div class="setup-step">
+                    <h4>Update Tools</h4>
                     <p>Keep all tools updated with the update script:</p>
                     <div class="command-box">
                         <span>bash update-all-tools.sh</span>
@@ -1711,7 +1707,7 @@
     <!-- Footer -->
     <footer style="background: var(--dark-secondary); border-top: 2px solid var(--primary); padding: 40px 20px; margin-top: 60px; text-align: center;">
         <p style="color: var(--muted-text); margin-bottom: 10px;">
-            DorkVault - Security Tools Arsenal | Created for Security Researchers and Penetration Testers
+            VulnScout - Security Tools Arsenal | Created for Security Researchers and Penetration Testers
         </p>
         <p style="color: var(--muted-text); font-size: 0.9em;">
             <i class="fas fa-shield-alt"></i> Use these tools responsibly and only on systems you have permission to test
