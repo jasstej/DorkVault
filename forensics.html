@@ -434,7 +434,7 @@
 
     <!-- Hero Section -->
     <div class="forensics-hero">
-        <h1><i class="fas fa-microscope"></i> Digital Forensics Arsenal</h1>
+        <h1><i class="fas fa-microscope"></i> Digital Forensics</h1>
         <p>Master digital forensics with tutorials, tools, and comprehensive walkthroughs</p>
     </div>
 
@@ -490,6 +490,10 @@
             <button class="filter-btn" onclick="filterForensics('memory')"><i class="fas fa-brain"></i> Memory Analysis</button>
             <button class="filter-btn" onclick="filterForensics('network')"><i class="fas fa-network-wired"></i> Network</button>
             <button class="filter-btn" onclick="filterForensics('logs')"><i class="fas fa-file-alt"></i> Log Analysis</button>
+            <button class="filter-btn" onclick="filterForensics('mobile')"><i class="fas fa-mobile-alt"></i> Mobile</button>
+            <button class="filter-btn" onclick="filterForensics('malware')"><i class="fas fa-virus"></i> Malware</button>
+            <button class="filter-btn" onclick="filterForensics('browser')"><i class="fas fa-globe"></i> Browser/Apps</button>
+            <button class="filter-btn" onclick="filterForensics('utilities')"><i class="fas fa-tools"></i> Utilities</button>
         </div>
 
         <!-- DISK FORENSICS Section -->
@@ -497,7 +501,7 @@
             <div class="category-header">
                 <i class="fas fa-hdd category-icon"></i>
                 <h2>Disk & File Forensics</h2>
-                <div class="category-count">5 Tools</div>
+                <div class="category-count">7 Tools</div>
             </div>
             <div class="forensics-grid">
                 <!-- Autopsy -->
@@ -787,6 +791,126 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Bulk Extractor -->
+                <div class="forensic-card" data-tool="bulk-extractor">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-magnet"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Bulk Extractor</div>
+                            <div class="forensic-type">Disk Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Scans disk images for email addresses, credit cards, URLs, and other sensitive data without parsing file systems. Extracts structured information from any data.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Linux:</span>
+                                <span class="command-text">sudo apt-get install bulk-extractor</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Source:</span>
+                                <span class="command-text">git clone https://github.com/simsong/bulk_extractor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Scans raw data looking for patterns like emails, URLs, credit cards</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Output:</span>
+                                <span class="command-text">Creates separate files for each data type found (emails.txt, urls.txt, etc.)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Scan image:</span>
+                                <span class="command-text">bulk_extractor -o output_dir disk.img</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Email extraction:</span>
+                                <span class="command-text">bulk_extractor -E email -o emails_dir disk.img</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/simsong/bulk_extractor" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- dd / dcfldd -->
+                <div class="forensic-card" data-tool="dd-dcfldd">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-clone"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">dd / dcfldd</div>
+                            <div class="forensic-type">Disk Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Low-level disk copying tools for forensic imaging. dd is standard Unix utility, dcfldd is enhanced version with built-in hashing and progress.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">dd:</span>
+                                <span class="command-text">Pre-installed on all Unix/Linux systems</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">dcfldd:</span>
+                                <span class="command-text">sudo apt-get install dcfldd</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">dd:</span>
+                                <span class="command-text">Block-by-block disk copy, exact bit-for-bit duplication</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">dcfldd:</span>
+                                <span class="command-text">Enhanced dd with hash verification, progress bar, and split output</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">dd basic:</span>
+                                <span class="command-text">dd if=/dev/sda of=disk.img bs=4M status=progress</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">dcfldd:</span>
+                                <span class="command-text">dcfldd if=/dev/sda of=disk.img hash=sha256 hashwindow=1G</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Split output:</span>
+                                <span class="command-text">dcfldd if=/dev/sda of=disk.img split=4G hashwindow=4G</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://dcfldd.sourceforge.net/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> dcfldd Website
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -795,7 +919,7 @@
             <div class="category-header">
                 <i class="fas fa-brain category-icon"></i>
                 <h2>Memory & RAM Analysis</h2>
-                <div class="category-count">3 Tools</div>
+                <div class="category-count">5 Tools</div>
             </div>
             <div class="forensics-grid">
                 <!-- Volatility -->
@@ -965,6 +1089,122 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Rekall -->
+                <div class="forensic-card" data-tool="rekall">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-memory"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Rekall</div>
+                            <div class="forensic-type">Memory Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Advanced memory analysis framework similar to Volatility. Provides interactive shell and supports Windows, Linux, and macOS memory dumps.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">pip:</span>
+                                <span class="command-text">pip install rekall</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Clone:</span>
+                                <span class="command-text">git clone https://github.com/google/rekall</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Interactive memory forensics with plugins for process, network, registry analysis</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Features:</span>
+                                <span class="command-text">Live memory analysis, malware detection, rootkit discovery</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Interactive:</span>
+                                <span class="command-text">rekall -f memory.dmp</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">List processes:</span>
+                                <span class="command-text">rekall -f memory.dmp pslist</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/google/rekall" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- MemProcFS -->
+                <div class="forensic-card" data-tool="memprocfs">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-folder-tree"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">MemProcFS</div>
+                            <div class="forensic-type">Memory Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Mount memory dumps as a virtual file system. Browse memory like a directory structure with files representing processes, registry, network connections.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Download:</span>
+                                <span class="command-text">https://github.com/ufrisk/MemProcFS/releases</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Windows:</span>
+                                <span class="command-text">Extract ZIP and run memprocfs.exe</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Concept:</span>
+                                <span class="command-text">Creates virtual filesystem from memory dump for easy browsing</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Structure:</span>
+                                <span class="command-text">/processes/, /registry/, /network/, /files/ directories</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Mount:</span>
+                                <span class="command-text">memprocfs.exe -device memory.dmp -mount M</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Browse:</span>
+                                <span class="command-text">cd M:\processes\ && dir</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/ufrisk/MemProcFS" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -973,7 +1213,7 @@
             <div class="category-header">
                 <i class="fas fa-file-alt category-icon"></i>
                 <h2>Log Analysis & Event Reconstruction</h2>
-                <div class="category-count">4 Tools</div>
+                <div class="category-count">6 Tools</div>
             </div>
             <div class="forensics-grid">
                 <!-- ELK Stack -->
@@ -1168,6 +1408,105 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- SIEMonster -->
+                <div class="forensic-card" data-tool="siemonster">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">SIEMonster</div>
+                            <div class="forensic-type">Log Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Open-source SIEM (Security Information & Event Management) platform. Monitors security events, correlates logs, and provides threat detection.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Docker:</span>
+                                <span class="command-text">docker pull siemonster/siemonster</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">GitHub:</span>
+                                <span class="command-text">git clone https://github.com/siemonster/siemonster</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Aggregates logs from multiple sources for centralized monitoring</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Features:</span>
+                                <span class="command-text">Real-time alerts, correlation rules, threat intelligence integration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://siemonster.com/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Graylog -->
+                <div class="forensic-card" data-tool="graylog">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-server"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Graylog</div>
+                            <div class="forensic-type">Log Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Free log management and analysis tool. Collect, index, and analyze terabytes of log data from any source with powerful search capabilities.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Docker:</span>
+                                <span class="command-text">docker run -d -p 9000:9000 graylog/graylog</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Linux:</span>
+                                <span class="command-text">wget https://packages.graylog2.org/repo/packages/graylog-server.deb</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Collection:</span>
+                                <span class="command-text">Accepts syslog, GELF, beats, and custom log inputs</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Analysis:</span>
+                                <span class="command-text">Full-text search, dashboards, alerting, and stream processing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Access:</span>
+                                <span class="command-text">http://localhost:9000 (admin/admin)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://www.graylog.org/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1176,7 +1515,7 @@
             <div class="category-header">
                 <i class="fas fa-network-wired category-icon"></i>
                 <h2>Network Forensics & Traffic Analysis</h2>
-                <div class="category-count">3 Tools</div>
+                <div class="category-count">4 Tools</div>
             </div>
             <div class="forensics-grid">
                 <!-- Wireshark -->
@@ -1360,6 +1699,745 @@
                     <div class="forensic-links">
                         <a href="https://www.tcpdump.org/" class="forensic-link" target="_blank">
                             <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tshark -->
+                <div class="forensic-card" data-tool="tshark">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-code"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Tshark</div>
+                            <div class="forensic-type">Network Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Command-line version of Wireshark. Powerful packet analysis tool for scripting, automation, and headless systems with full protocol support.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Linux:</span>
+                                <span class="command-text">sudo apt-get install tshark</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">macOS:</span>
+                                <span class="command-text">brew install wireshark (includes tshark)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">CLI packet analyzer with same features as Wireshark GUI</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Output:</span>
+                                <span class="command-text">Text, JSON, CSV, PDML formats for scripting and automation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Examples</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Read PCAP:</span>
+                                <span class="command-text">tshark -r traffic.pcap</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Filter HTTP:</span>
+                                <span class="command-text">tshark -r traffic.pcap -Y 'http.request'</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Export JSON:</span>
+                                <span class="command-text">tshark -r traffic.pcap -T json > output.json</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://www.wireshark.org/docs/man-pages/tshark.html" class="forensic-link" target="_blank">
+                            <i class="fas fa-book"></i> Docs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE FORENSICS Section -->
+        <div class="category-section" data-category="mobile">
+            <div class="category-header">
+                <i class="fas fa-mobile-alt category-icon"></i>
+                <h2>Mobile Forensics</h2>
+                <div class="category-count">2 Tools</div>
+            </div>
+            <div class="forensics-grid">
+                <!-- MobSF -->
+                <div class="forensic-card" data-tool="mobsf">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">MobSF</div>
+                            <div class="forensic-type">Mobile Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Mobile Security Framework - automated analysis platform for Android/iOS apps. Performs static and dynamic analysis plus forensic data extraction.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Docker:</span>
+                                <span class="command-text">docker pull opensecurity/mobile-security-framework-mobsf</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Run:</span>
+                                <span class="command-text">docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Static Analysis:</span>
+                                <span class="command-text">Analyzes APK/IPA files for security issues, permissions, code review</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Dynamic Analysis:</span>
+                                <span class="command-text">Runtime analysis, network traffic, API monitoring</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Forensics:</span>
+                                <span class="command-text">Extracts app data, databases, shared preferences, files</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Access:</span>
+                                <span class="command-text">http://localhost:8000</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Upload:</span>
+                                <span class="command-text">Upload APK/IPA or ZIP for analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/MobSF/Mobile-Security-Framework-MobSF" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- OS-Forensics -->
+                <div class="forensic-card" data-tool="os-forensics">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-tablet-alt"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">OS-Forensics</div>
+                            <div class="forensic-type">Mobile Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Digital investigation tool with mobile data recovery features. Free edition supports basic mobile device forensics and data extraction.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Download:</span>
+                                <span class="command-text">https://www.osforensics.com/download.html</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Platform:</span>
+                                <span class="command-text">Windows - Free for personal/educational use</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> Features</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Mobile:</span>
+                                <span class="command-text">Extract contacts, messages, call logs from Android/iOS backups</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Search:</span>
+                                <span class="command-text">Index and search mobile device images</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://www.osforensics.com/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MALWARE ANALYSIS Section -->
+        <div class="category-section" data-category="malware">
+            <div class="category-header">
+                <i class="fas fa-virus category-icon"></i>
+                <h2>Malware & Malicious Code Analysis</h2>
+                <div class="category-count">3 Tools</div>
+            </div>
+            <div class="forensics-grid">
+                <!-- CAPE Sandbox -->
+                <div class="forensic-card" data-tool="cape">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-box"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">CAPE Sandbox</div>
+                            <div class="forensic-type">Malware Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Malware configuration and payload extraction sandbox. Automated malware analysis with advanced unpacking and configuration extraction capabilities.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Clone:</span>
+                                <span class="command-text">git clone https://github.com/kevoreilly/CAPEv2</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Setup:</span>
+                                <span class="command-text">cd CAPEv2 && sudo ./installer/cape2.sh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Executes malware in isolated VM, monitors behavior and extracts payloads</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Output:</span>
+                                <span class="command-text">Network traffic, API calls, file operations, memory dumps, configurations</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Submit:</span>
+                                <span class="command-text">cape submit malware.exe</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Web UI:</span>
+                                <span class="command-text">http://localhost:8000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/kevoreilly/CAPEv2" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cuckoo Sandbox -->
+                <div class="forensic-card" data-tool="cuckoo">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-flask"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Cuckoo Sandbox</div>
+                            <div class="forensic-type">Malware Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Leading open-source automated malware analysis system. Analyzes suspicious files/URLs in isolated environment to detect malicious behavior.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">pip:</span>
+                                <span class="command-text">pip install cuckoo</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Setup:</span>
+                                <span class="command-text">cuckoo init && cuckoo community</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class=\"fas fa-lightbulb\"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Execution:</span>
+                                <span class="command-text">Runs malware in VMs (VirtualBox/VMware/KVM) for safe analysis</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Monitoring:</span>
+                                <span class="command-text">Tracks API calls, network connections, file modifications, registry changes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Submit file:</span>
+                                <span class="command-text">cuckoo submit malware.exe</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Web interface:</span>
+                                <span class="command-text">cuckoo web runserver 0.0.0.0:8000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://cuckoosandbox.org/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PeStudio -->
+                <div class="forensic-card" data-tool="pestudio">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">PeStudio</div>
+                            <div class="forensic-type">Malware Analysis</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Static malware analysis tool for Windows executables. Analyzes PE files without execution - detects packers, suspicious strings, imports, and anomalies.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Download:</span>
+                                <span class="command-text">https://www.winitor.com/download</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Platform:</span>
+                                <span class="command-text">Windows portable executable - no installation required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Static PE file analysis - no execution, safe for initial triage</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Detection:</span>
+                                <span class="command-text">Identifies suspicious imports, strings, URLs, crypto operations, packers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Features</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">VirusTotal:</span>
+                                <span class="command-text">Integrated VirusTotal hash lookup</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Strings:</span>
+                                <span class="command-text">Extracts and highlights suspicious strings and indicators</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://www.winitor.com/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BROWSER & APPLICATION FORENSICS Section -->
+        <div class="category-section" data-category="browser">
+            <div class="category-header">
+                <i class="fas fa-globe category-icon"></i>
+                <h2>Browser & Application Forensics</h2>
+                <div class="category-count">3 Tools</div>
+            </div>
+            <div class="forensics-grid">
+                <!-- Browser History Capturer -->
+                <div class="forensic-card" data-tool="browser-history">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-history"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Browser History Capturer</div>
+                            <div class="forensic-type">Browser Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Extract browsing history from Chrome, Firefox, Edge, Safari. Recovers visited URLs, timestamps, download history, and cached data.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Python:</span>
+                                <span class="command-text">pip install browser-history</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Alternative:</span>
+                                <span class="command-text">Use NirSoft BrowsingHistoryView (Windows GUI)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Reads browser SQLite databases and parses history records</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Sources:</span>
+                                <span class="command-text">Chrome, Firefox, Safari, Edge history databases</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Python:</span>
+                                <span class="command-text">from browser_history import get_history; outputs = get_history()</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/browser-history/browser-history" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Plaso / log2timeline -->
+                <div class="forensic-card" data-tool="plaso">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-timeline"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Plaso / log2timeline</div>
+                            <div class="forensic-type">Browser Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Create super timelines from forensic artifacts. Parses browser history, logs, registry, file metadata to create comprehensive activity timeline.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Ubuntu:</span>
+                                <span class="command-text">sudo add-apt-repository ppa:gift/stable && sudo apt-get install plaso-tools</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">pip:</span>
+                                <span class="command-text">pip install plaso</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Extracts timestamps from 100+ artifact types into unified timeline</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Sources:</span>
+                                <span class="command-text">Browser history, prefetch, USN journal, event logs, registry</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Create timeline:</span>
+                                <span class="command-text">log2timeline.py timeline.plaso /mnt/image</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">View:</span>
+                                <span class="command-text">psort.py -o l2tcsv -w timeline.csv timeline.plaso</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/log2timeline/plaso" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RegRipper -->
+                <div class="forensic-card" data-tool="regripper">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-database"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">RegRipper</div>
+                            <div class="forensic-type">Browser Forensics</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Windows Registry forensic tool. Extracts user activity, installed software, USB devices, recent files, and system configuration from registry hives.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Download:</span>
+                                <span class="command-text">https://github.com/keydet89/RegRipper3.0</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Requirements:</span>
+                                <span class="command-text">Perl interpreter (Windows/Linux)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Parses registry hives (NTUSER.DAT, SYSTEM, SAM, SOFTWARE)</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Extraction:</span>
+                                <span class="command-text">RecentDocs, UserAssist, ShimCache, AmCache, run keys, services</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Run:</span>
+                                <span class="command-text">rip.pl -r NTUSER.DAT -p recentdocs</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">All plugins:</span>
+                                <span class="command-text">rip.pl -r NTUSER.DAT -a</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/keydet89/RegRipper3.0" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORENSIC UTILITIES Section -->
+        <div class="category-section" data-category="utilities">
+            <div class="category-header">
+                <i class="fas fa-tools category-icon"></i>
+                <h2>Forensic Utilities & File Analysis</h2>
+                <div class="category-count">3 Tools</div>
+            </div>
+            <div class="forensics-grid">
+                <!-- ExifTool -->
+                <div class="forensic-card" data-tool="exiftool">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-image"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">ExifTool</div>
+                            <div class="forensic-type">Forensic Utilities</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Read, write, and edit metadata from images, videos, PDFs, and office documents. Extract camera info, GPS coordinates, timestamps, and more.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Linux:</span>
+                                <span class="command-text">sudo apt-get install exiftool</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">macOS:</span>
+                                <span class="command-text">brew install exiftool</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Reads EXIF, GPS, IPTC, XMP metadata from files</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Supports:</span>
+                                <span class="command-text">JPEG, PNG, PDF, DOCX, MP4, and 300+ file formats</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Read metadata:</span>
+                                <span class="command-text">exiftool image.jpg</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Extract GPS:</span>
+                                <span class="command-text">exiftool -gps* image.jpg</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Bulk extract:</span>
+                                <span class="command-text">exiftool -csv -r /path/to/images > metadata.csv</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://exiftool.org/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hashdeep / md5deep -->
+                <div class="forensic-card" data-tool="hashdeep">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-fingerprint"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">Hashdeep / md5deep</div>
+                            <div class="forensic-type">Forensic Utilities</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Compute and verify cryptographic hashes for files. Generate hash sets for integrity verification and known file elimination in forensics.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Linux:</span>
+                                <span class="command-text">sudo apt-get install md5deep</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">macOS:</span>
+                                <span class="command-text">brew install md5deep</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Recursively computes MD5, SHA1, SHA256 hashes for files</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Verification:</span>
+                                <span class="command-text">Audit mode compares files against known hash databases</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> Usage</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Generate hashes:</span>
+                                <span class="command-text">hashdeep -r /evidence > hashes.txt</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Verify:</span>
+                                <span class="command-text">hashdeep -r -k hashes.txt -a /evidence</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">MD5 only:</span>
+                                <span class="command-text">md5deep -r /evidence</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://github.com/jessek/hashdeep" class="forensic-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SQLite Forensic Explorer -->
+                <div class="forensic-card" data-tool="sqlite-explorer">
+                    <div class="forensic-header">
+                        <div class="forensic-icon"><i class="fas fa-table"></i></div>
+                        <div class="forensic-title">
+                            <div class="forensic-name">SQLite Forensic Explorer</div>
+                            <div class="forensic-type">Forensic Utilities</div>
+                        </div>
+                    </div>
+                    <div class="forensic-description">
+                        Specialized tool for examining SQLite databases commonly found in mobile apps, browsers, and applications. Recovers deleted records and analyzes structure.
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-download"></i> Installation</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Commercial:</span>
+                                <span class="command-text">https://sandersonforensics.com/</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Alternative:</span>
+                                <span class="command-text">sqlitebrowser (free GUI) - brew install db-browser-for-sqlite</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-lightbulb"></i> How It Works</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Function:</span>
+                                <span class="command-text">Opens and analyzes SQLite .db files from apps and systems</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Recovery:</span>
+                                <span class="command-text">Carves deleted records from unallocated database space</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-section">
+                        <div class="forensic-section-title"><i class="fas fa-terminal"></i> CLI Alternative</div>
+                        <div class="forensic-commands">
+                            <div class="command-item">
+                                <span class="command-label">Open DB:</span>
+                                <span class="command-text">sqlite3 database.db</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">List tables:</span>
+                                <span class="command-text">.tables</span>
+                            </div>
+                            <div class="command-item">
+                                <span class="command-label">Query:</span>
+                                <span class="command-text">SELECT * FROM messages;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forensic-links">
+                        <a href="https://sqlitebrowser.org/" class="forensic-link" target="_blank">
+                            <i class="fas fa-globe"></i> DB Browser (Free)
                         </a>
                     </div>
                 </div>
